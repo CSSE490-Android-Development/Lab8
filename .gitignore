@@ -1,0 +1,6 @@
+*.DS_STORE
+bin/
+gen/
+.classpath
+.project
+.*.swp
