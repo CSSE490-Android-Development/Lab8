@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:gravity="center"
+	android:textSize="20sp" android:text="test" android:layout_width="fill_parent" android:layout_height="@dimen/hole_title_height" android:textColor="@color/hole_title_off_white"/>

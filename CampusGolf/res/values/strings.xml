@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="enter_score_for">Enter score for %1$s</string>
+    <string name="right_arrows">&gt;&gt;&gt;</string>
+    <string name="left_arrows">&lt;&lt;&lt;</string>
+	<string name="begin_round">Begin Round</string>
+	<string name="app_name">Campus Golf</string>
+	<string name="hole_not_played">-</string>
+	<string name="even">Even</string>
+</resources>

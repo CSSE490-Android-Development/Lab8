@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_height="fill_parent"
+	android:layout_width="fill_parent"
+	android:padding="15dp">
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="wrap_content"
+		android:layout_gravity="center"
+		android:orientation="vertical"
+		android:background="#d444">
+		<TextView
+			android:id="@+id/title_text_view"
+			android:layout_height="wrap_content"
+			android:layout_width="fill_parent"
+			android:textSize="26sp"
+			android:text="Enter score for Dave"
+			android:gravity="center"
+			android:layout_marginTop="5dp"></TextView>
+		<GridView
+			android:layout_height="wrap_content"
+			android:id="@+id/enter_hole_strokes_grid_view"
+			android:numColumns="3"
+			android:layout_width="fill_parent"
+			android:gravity="center"
+			android:verticalSpacing="15dp"
+			android:layout_marginTop="5dp"
+			android:layout_marginBottom="15dp"></GridView>
+	</LinearLayout>
+</FrameLayout>

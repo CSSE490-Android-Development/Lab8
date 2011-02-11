@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:padding="10dp">
+	<EditText
+		android:layout_height="wrap_content"
+		android:id="@+id/golfer_name_edit_text"
+		android:layout_width="fill_parent"></EditText>
+	<ListView
+		android:layout_height="wrap_content"
+		android:id="@+id/golfer_names_list_view"
+		android:layout_width="fill_parent"
+		android:layout_below="@+id/golfer_name_edit_text"></ListView>
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:id="@+id/begin_round_button"
+		android:text="@string/begin_round"
+		android:layout_width="fill_parent"></Button>
+</RelativeLayout>
