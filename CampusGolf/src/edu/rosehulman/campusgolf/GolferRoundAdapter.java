@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.GridView;
 
 public class GolferRoundAdapter extends ArrayAdapter<GolferRound> {
 	
@@ -31,6 +32,22 @@ public class GolferRoundAdapter extends ArrayAdapter<GolferRound> {
 		} else {
 			roundView = (GolferRoundView) convertView;
 		}
+		final GridView scoreGrid = roundView.getHoleScoresGridView();
+		GolferRound currentRound = getItem(position);
+		
+		HoleDisplayAdapter holeAdapter = new HoleDisplayAdapter(mContext, R.layout.hole_display_text_view, currentRound.getRoundHoleArray());
+		
+		scoreGrid.setAdapter(holeAdapter);
+		scoreGrid.setFocusable(false);
+		scoreGrid.setFocusableInTouchMode(false);
+		
+		final int listPosition = position;
+		roundView.getHoleScoresGridView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int gridPosition, long id) {
+				mContext.pressedPlayer(listPosition);
+			}
+		});
 		roundView.getPlayerNameTextView().setText(getItem(position).getName());
 		roundView.getScoreTextView().setText(getItem(position).getRoundOffPar(mContext) + "");
 		return roundView;

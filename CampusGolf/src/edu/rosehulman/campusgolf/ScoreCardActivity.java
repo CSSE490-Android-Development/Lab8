@@ -49,7 +49,7 @@ public class ScoreCardActivity extends Activity {
 		for(int i=0 ; i<golferNames.length ; i++) {
 			this.mGolferRounds.add(new GolferRound(golferNames[i], coursePars));
 		}
-		addFakeScores();  // TODO: Part D) Remove after testing is complete
+		//addFakeScores();  // TODO: Part D) Remove after testing is complete
 
 		// TODO: Part B) Create a new GolferRoundAdapter using the golfer_round_view resource, player_name_text_view text view id, and the mGolferRounds ArrayList
 		// Set that adapter to the mGolferRoundsAdapter member variable
@@ -91,6 +91,7 @@ public class ScoreCardActivity extends Activity {
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Toast.makeText(ScoreCardActivity.this, "Moved to hole " + (position + 1), Toast.LENGTH_SHORT).show();
+				ScoreCardActivity.this.mGolferRoundAdapter.notifyDataSetChanged();
 			}
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {
