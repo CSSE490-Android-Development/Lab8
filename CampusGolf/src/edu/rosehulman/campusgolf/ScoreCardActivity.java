@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -85,6 +86,8 @@ public class ScoreCardActivity extends Activity {
 		
 		// TODO: Part C) For the Hole Title Gallery setOnItemSelectedListener
 		mHoleTitleGallery.setOnItemSelectedListener(new OnItemSelectedListener() {
+			
+			// TODO: Part C) onItemSelected should display a Toast saying "Moved to hole " + (position+1)
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 				Toast.makeText(ScoreCardActivity.this, "Moved to hole " + (position + 1), Toast.LENGTH_SHORT).show();
@@ -95,8 +98,9 @@ public class ScoreCardActivity extends Activity {
 			}
 		});
 		// onNothingSelected can do nothing
-		// Part C) onItemSelected should display a Toast saying "Moved to hole " + (position+1)
-		// Part D) onItemSelected needs to call ScoreCardActivity.this.mGolferRoundsAdapter.notifyDataSetChanged()
+
+		
+		// TODO: Part D) onItemSelected needs to call ScoreCardActivity.this.mGolferRoundsAdapter.notifyDataSetChanged()
 	}
 
 	private void addFakeScores() {
@@ -109,46 +113,47 @@ public class ScoreCardActivity extends Activity {
 
 	public int getCurrentHole() {
 	// Part C) Use the mHoleTitleGallery to return the selected item position
-		return 0;
+		return mHoleTitleGallery.getSelectedItemPosition();
 	}
 
 	public void pressedPlayer(int playerPosition) {
 		
-		Toast.makeText(this, "You pressed " + mGolferRounds.get(playerPosition).getName(),Toast.LENGTH_SHORT).show();
+		//Toast.makeText(this, "Player (" + playerPosition + ") " + mGolferRounds.get(playerPosition).getName() + " On Hole: " + getCurrentHole(),Toast.LENGTH_SHORT).show();
 		// Part C) Change to a different toast then to enterScoreForPlayer()
 		//Toast.makeText(this, "Player " + playerPosition+ " On Hole " + getCurrentHole(),Toast.LENGTH_SHORT).show();
 		// enterScoreForPlayer(playerPosition);
-		// Note: This was intentionally decoupled just in case pressedPlayer every wanted to do more than just call enterScoreForPlayer 
+		// Note: This was intentionally decoupled just in case pressedPlayer every wanted to do more than just call enterScoreForPlayer
+		enterScoreForPlayer(playerPosition);
 	}
 
 	// TODO: Part C) Uncomment when you are ready to enter scores
-//	public void enterScoreForPlayer(int playerPosition) {
-//		int currentHole = this.getCurrentHole();
-//		this.mStrokeEntryForPosition = playerPosition;
-//		Intent enterPlayerStrokesForHoleIntent = new Intent(this, StrokeEntryActivity.class);
-//		enterPlayerStrokesForHoleIntent.putExtra(KEY_PLAYER_NAME, mGolferRounds.get(playerPosition).toString());
-//		enterPlayerStrokesForHoleIntent.putExtra(KEY_CURRENT_HOLE_PAR, mGolferRounds.get(playerPosition).getHolePar(currentHole));
-//		startActivityForResult(enterPlayerStrokesForHoleIntent, REQUEST_CODE_ENTER_STROKES);
-//	}
-//
-//	@Override
-//	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//		super.onActivityResult(requestCode, resultCode, data);
-//		switch (requestCode) {
-//		case REQUEST_CODE_ENTER_STROKES:
-//			if ( resultCode == RESULT_OK) {
-//				int strokesPressed = data.getIntExtra(KEY_PLAYER_SCORE_PRESSED, 0);
-//				int currentHole = this.getCurrentHole();
-//				mGolferRounds.get(mStrokeEntryForPosition).setHoleStrokes(currentHole, strokesPressed);
-//				ScoreCardActivity.this.mGolferRoundsAdapter.notifyDataSetChanged();
-//				//Log.d("OP", "Result ok");
-//			} else {
-//				Log.d("OP", "Result not ok");
-//			}		
-//			break;
-//		default:
-//			Log.d("OP", "Unknown activity");
-//			break;
-//		}
-//	}
+	public void enterScoreForPlayer(int playerPosition) {
+		int currentHole = this.getCurrentHole();
+		this.mStrokeEntryForPosition = playerPosition;
+		Intent enterPlayerStrokesForHoleIntent = new Intent(this, StrokeEntryActivity.class);
+		enterPlayerStrokesForHoleIntent.putExtra(KEY_PLAYER_NAME, mGolferRounds.get(playerPosition).toString());
+		enterPlayerStrokesForHoleIntent.putExtra(KEY_CURRENT_HOLE_PAR, mGolferRounds.get(playerPosition).getHolePar(currentHole));
+		startActivityForResult(enterPlayerStrokesForHoleIntent, REQUEST_CODE_ENTER_STROKES);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		switch (requestCode) {
+		case REQUEST_CODE_ENTER_STROKES:
+			if ( resultCode == RESULT_OK) {
+				int strokesPressed = data.getIntExtra(KEY_PLAYER_SCORE_PRESSED, 0);
+				int currentHole = this.getCurrentHole();
+				mGolferRounds.get(mStrokeEntryForPosition).setHoleStrokes(currentHole, strokesPressed);
+				ScoreCardActivity.this.mGolferRoundAdapter.notifyDataSetChanged();
+				//Log.d("OP", "Result ok");
+			} else {
+				Log.d("OP", "Result not ok");
+			}		
+			break;
+		default:
+			Log.d("OP", "Unknown activity");
+			break;
+		}
+	}
 }
