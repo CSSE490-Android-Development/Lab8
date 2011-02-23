@@ -3,8 +3,10 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:background="@drawable/green_gradient"
 	android:layout_width="fill_parent"
-	android:id="@+id/player_scorecard_rel_layout" android:layout_height="110dp">
+	android:id="@+id/player_scorecard_rel_layout"
+	android:layout_height="110dp">
 	<TextView
+		android:id="@+id/player_name_text_view"
 		android:layout_alignParentTop="true"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
@@ -12,18 +14,23 @@
 		android:textColor="#000"
 		android:layout_marginTop="5dp"
 		android:layout_marginLeft="10dp"
-		android:id="@+id/player_name_text_view" android:textSize="20sp"></TextView>
+		android:textSize="20sp"></TextView>
 	<GridView
+		android:id="@+id/hole_scores_grid_view"
 		android:layout_below="@+id/player_name_text_view"
 		android:layout_height="wrap_content"
 		android:layout_width="fill_parent"
-		android:id="@+id/hole_scores_grid_view" android:numColumns="9" android:stretchMode="columnWidth" android:paddingLeft="5dp"></GridView>
+		android:numColumns="9"
+		android:stretchMode="columnWidth"
+		android:paddingLeft="5dp"></GridView>
 	<TextView
+		android:id="@+id/score_text_view"
 		android:layout_height="wrap_content"
 		android:layout_width="wrap_content"
 		android:layout_alignParentRight="true"
 		android:text="-3"
 		android:textColor="#000"
 		android:layout_alignTop="@+id/player_name_text_view"
-		android:layout_marginRight="10dp" android:id="@+id/score_text_view" android:textSize="20sp"></TextView>
+		android:layout_marginRight="10dp"
+		android:textSize="20sp"></TextView>
 </RelativeLayout>

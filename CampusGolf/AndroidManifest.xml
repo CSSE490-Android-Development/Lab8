@@ -10,18 +10,20 @@
 		<activity
 			android:name=".EnterGolferNamesActivity"
 			android:label="@string/app_name">
-			<intent-filter>
-				<action android:name="android.intent.action.MAIN" />
-				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
 		</activity>
 		<activity
 			android:name=".ScoreCardActivity"
 			android:theme="@android:style/Theme.NoTitleBar">
+			<intent-filter>
+				<action
+					android:name="android.intent.action.MAIN"/>
+				<category
+					android:name="android.intent.category.LAUNCHER"/>
+			</intent-filter>
 		</activity>
 		<activity
 			android:name=".StrokeEntryActivity"
 			android:theme="@android:style/Theme.Translucent.NoTitleBar">
 		</activity>
 	</application>
-</manifest> 
+</manifest>

@@ -5,12 +5,20 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.Gallery;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class ScoreCardActivity extends Activity {
 
 	// TODO: Part C) Create a member variable for the hole title Gallery (called mine mHoleTitleGallery)
+	private Gallery mHoleTitleGallery;
 	// TODO: Part B) Create a member variable for the GolferRoundAdapter (called mine mGolferRoundsAdapter)
+	private GolferRoundAdapter mGolferRoundAdapter;
 	private ArrayList<GolferRound> mGolferRounds = new ArrayList<GolferRound>();
 	private static final int REQUEST_CODE_ENTER_STROKES = 0;
 	public static final String KEY_PLAYER_NAME = "KEY_PLAYER_NAME";
@@ -44,10 +52,21 @@ public class ScoreCardActivity extends Activity {
 
 		// TODO: Part B) Create a new GolferRoundAdapter using the golfer_round_view resource, player_name_text_view text view id, and the mGolferRounds ArrayList
 		// Set that adapter to the mGolferRoundsAdapter member variable
+		mGolferRoundAdapter = new GolferRoundAdapter(this, R.layout.golfer_round_view, R.id.player_name_text_view, mGolferRounds);
+
 		// TODO: Part B) Capture the ListView
+		final ListView GolfListView = (ListView) findViewById(R.id.golfer_rounds_list_view);
+		
 		// TODO: Part B) Set the adapter for the ListView as the mGolferRoundsAdapter
+		GolfListView.setAdapter(mGolferRoundAdapter);
 		
 		// TODO: Part B) setOnItemClickListener to call the function pressedPlayer(position)
+		GolfListView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				pressedPlayer(position);
+			}
+		});
 
 		// Convert the coursePars int[] to a Integer[] so it can be used with an ArrayAdapter
 		Integer[] courseParsIntegers = new Integer[coursePars.length];
@@ -56,10 +75,25 @@ public class ScoreCardActivity extends Activity {
 		}
 		
 		// TODO: Part C) Capture the hole_title_gallery and set it to the mHoleTitleGallery member variable
+		mHoleTitleGallery = (Gallery) findViewById(R.id.hole_title_gallery);
+		
 		// TODO: Part C) Create a new HoleTitleAdapter using the hole_title_text_view resource and the courseParsIntegers Integer[]
+		final HoleTitleAdapter holeAdapter = new HoleTitleAdapter(this, R.layout.hole_title_text_view, courseParsIntegers);
+		
 		// TODO: Part C) setAdapter for the mHoleTitleGallery to your HoleTitleAdapter
+		mHoleTitleGallery.setAdapter(holeAdapter);
 		
 		// TODO: Part C) For the Hole Title Gallery setOnItemSelectedListener
+		mHoleTitleGallery.setOnItemSelectedListener(new OnItemSelectedListener() {
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+				Toast.makeText(ScoreCardActivity.this, "Moved to hole " + (position + 1), Toast.LENGTH_SHORT).show();
+			}
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+			}
+		});
 		// onNothingSelected can do nothing
 		// Part C) onItemSelected should display a Toast saying "Moved to hole " + (position+1)
 		// Part D) onItemSelected needs to call ScoreCardActivity.this.mGolferRoundsAdapter.notifyDataSetChanged()
@@ -79,7 +113,8 @@ public class ScoreCardActivity extends Activity {
 	}
 
 	public void pressedPlayer(int playerPosition) {
-		Toast.makeText(this, "Player " + playerPosition,Toast.LENGTH_SHORT).show();
+		
+		Toast.makeText(this, "You pressed " + mGolferRounds.get(playerPosition).getName(),Toast.LENGTH_SHORT).show();
 		// Part C) Change to a different toast then to enterScoreForPlayer()
 		//Toast.makeText(this, "Player " + playerPosition+ " On Hole " + getCurrentHole(),Toast.LENGTH_SHORT).show();
 		// enterScoreForPlayer(playerPosition);
