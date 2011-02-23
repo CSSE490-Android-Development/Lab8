@@ -8,16 +8,16 @@
 	<EditText
 		android:layout_height="wrap_content"
 		android:id="@+id/golfer_name_edit_text"
-		android:layout_width="fill_parent"></EditText>
+		android:layout_width="fill_parent"/>
 	<ListView
 		android:layout_height="wrap_content"
 		android:id="@+id/golfer_names_list_view"
 		android:layout_width="fill_parent"
-		android:layout_below="@+id/golfer_name_edit_text"></ListView>
+		android:layout_below="@id/golfer_name_edit_text"/>
 	<Button
 		android:layout_height="wrap_content"
 		android:layout_alignParentBottom="true"
 		android:id="@+id/begin_round_button"
 		android:text="@string/begin_round"
-		android:layout_width="fill_parent"></Button>
+		android:layout_width="fill_parent"/>
 </RelativeLayout>
